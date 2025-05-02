@@ -1,5 +1,7 @@
 #root {
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 .logo {
@@ -77,6 +79,14 @@
 .controls button{
   margin:5px;
 }
+
+.controls{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 
 .konvajs-content, .konvajs-content canvas, .personnalisation{

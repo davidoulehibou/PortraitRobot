@@ -122,7 +122,7 @@ const Canvas = () => {
         <Selector type={zoneSelection} onChange={handleSetSelection} />
       </div>
 
-      <Stage width={300} height={400} style={{ border: "1px solid #ccc", margin: "auto" }}>
+      <Stage width={300} height={400} style={{ border: "1px solid #ccc", margin: "auto",   borderRadius: "1vw" }}>
         <Layer>
           {selectedVisage && <CanvasImage src={selectedVisage} x={0} y={0} />}
 
