@@ -1,7 +1,5 @@
 #root {
-  text-align: center;
   display: flex;
-  align-items: center;
 }
 
 .logo {
@@ -9,12 +7,6 @@
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -40,23 +32,32 @@
   color: #888;
 }
 
+label{
+color:white
+}
+
+select{
+  padding:1vw 2vw
+}
 
 .page{
   display:grid;
-  margin:1vw;
-  grid-template-columns: 34vw 30vw 34vw;
-  height: calc(30vw/0.75)
+  margin:8vw 1vw;
+  grid-template-columns: 33vw 30vw 33vw;
+  gap:1vw;
+  height: calc(30vw/0.75);
 }
 
 .image-selector{
   width:6vw;
 
 }
-.selector-list button{
+.selector-list button, .accessoires button{
   height: fit-content;
   margin: 0.3vw 0 0  0.3vw;
   padding:0;
   border-radius: 0.3vw;
+  background-color: rgb(0, 71, 15);
 
   
 }
@@ -64,32 +65,73 @@
 .fieldset button{
   border-radius: 0.3vw 0.3vw 0 0;
   font-size: 1vw;
-
+  outline:none;
+  padding:0.8vw
 }
 
 .selector-list{
   display: flex;
   height:90%;
-  background-color: #747bff;
+  background-color: #2e802769;
   border-radius:0 0 0.3vw 0.3vw;
   flex-wrap: wrap;
   overflow: auto;
+  width: 100%;
 }
 
 .controls button{
-  margin:5px;
+  margin: 0.2vw;
+  padding: 0.5vw 1vw;
 }
 
-.controls{
+.controls, .bitons{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+h1{
+  color: beige;
+}
 
+.controls h1{
+  font-size: 2vw;
+}
 
-.konvajs-content, .konvajs-content canvas, .personnalisation{
+.konvajs-content, .konvajs-content canvas{
   width: 30vw !important;
   height: calc(30vw/0.75) !important;
+}
+
+.personnalisation{
+  width: 100%
+}
+
+
+.reset{
+  margin-top:20px !important;
+  background-color:#cc1b1b
+}
+
+.reset:hover{
+  border-color:#ff0000 ;
+}
+
+.boutons-fins{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 98vw;
+  padding-top: 2vw;
+}
+
+.accessoires{
+  background-color: #2e802769;
+  height: 50%;
+  border-radius: 0.3vw;
+  
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
