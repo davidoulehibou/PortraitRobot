@@ -20,7 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/galerie" element={<Galerie />} />
+        <Route path="/galerie/:scenario" element={<Galerie />} />
         <Route path="/" element={<Canvas />} />
       </Routes>
     </Router>

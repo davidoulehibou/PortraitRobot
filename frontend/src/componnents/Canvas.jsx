@@ -57,13 +57,6 @@ const Canvas = () => {
       console.error("Erreur lors de l’envoi au serveur:", err);
     }
   };
-  const changeScenar = () => {
-    if (scenario == 1) {
-      setScenario(2);
-    } else {
-      setScenario(1);
-    }
-  };
 
   const handlezoneSelection = (zone) => {
     setZoneSelection(zone);
@@ -228,6 +221,8 @@ const Canvas = () => {
             </button>
           </div>
           <Selector type={zoneSelection} onChange={handleSetSelection} />
+          <h3>Accessoires</h3>
+          <SelectorAcc onChange={handleToggleAccessoire} acc={accessoires} />
         </div>
 
         <Stage
@@ -236,16 +231,35 @@ const Canvas = () => {
           height={800}
           style={{
             border: "1px solid #ccc",
-            backgroundColor:"#fff9c8",
+            backgroundColor: "white",
             margin: "auto",
             borderRadius: "1vw",
           }}
         >
           <Layer>
-            {selectedVisage && <CanvasImage src={selectedVisage} x={0} y={0} />}
             {selectedCheveux && (
               <CanvasImage src={selectedCheveux} x={0} y={0} />
             )}
+
+            {selectedOreilles && (
+              <CanvasImage
+                src={selectedOreilles}
+                x={oreillesPosition.x}
+                y={oreillesPosition.y}
+              />
+            )}
+
+            {selectedOreilles && (
+              <CanvasImage
+                src={selectedOreilles}
+                x={-oreillesPosition.x + 600}
+                y={oreillesPosition.y}
+                flip={true}
+              />
+            )}
+
+            {selectedVisage && <CanvasImage src={selectedVisage} x={0} y={0} />}
+
             {selectedNez && (
               <CanvasImage
                 src={selectedNez}
@@ -290,21 +304,6 @@ const Canvas = () => {
                 flip={true}
               />
             )}
-            {selectedOreilles && (
-              <CanvasImage
-                src={selectedOreilles}
-                x={oreillesPosition.x}
-                y={oreillesPosition.y}
-              />
-            )}
-            {selectedOreilles && (
-              <CanvasImage
-                src={selectedOreilles}
-                x={-oreillesPosition.x + 600}
-                y={oreillesPosition.y}
-                flip={true}
-              />
-            )}
 
             {console.log(accessoires)}
             {accessoires.map((acc, index) => (
@@ -328,8 +327,6 @@ const Canvas = () => {
           </Layer>
         </Stage>
         <div>
-          <SelectorAcc onChange={handleToggleAccessoire} />
-
           <div className="controls">
             {zoneSelection === "nez" && (
               <>
@@ -429,22 +426,6 @@ const Canvas = () => {
                     </svg>
                   </button>
                   <div>
-                    <button onClick={() => moveBouche("left")}>
-                      <svg
-                        width="30"
-                        height="30"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M8.84182 3.13514C9.04327 3.32401 9.05348 3.64042 8.86462 3.84188L5.43521 7.49991L8.86462 11.1579C9.05348 11.3594 9.04327 11.6758 8.84182 11.8647C8.64036 12.0535 8.32394 12.0433 8.13508 11.8419L4.38508 7.84188C4.20477 7.64955 4.20477 7.35027 4.38508 7.15794L8.13508 3.15794C8.32394 2.95648 8.64036 2.94628 8.84182 3.13514Z"
-                          fill="currentColor"
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </button>
                     <button onClick={() => moveBouche("down")}>
                       <svg
                         width="30"
@@ -455,22 +436,6 @@ const Canvas = () => {
                       >
                         <path
                           d="M3.13523 6.15803C3.3241 5.95657 3.64052 5.94637 3.84197 6.13523L7.5 9.56464L11.158 6.13523C11.3595 5.94637 11.6759 5.95657 11.8648 6.15803C12.0536 6.35949 12.0434 6.67591 11.842 6.86477L7.84197 10.6148C7.64964 10.7951 7.35036 10.7951 7.15803 10.6148L3.15803 6.86477C2.95657 6.67591 2.94637 6.35949 3.13523 6.15803Z"
-                          fill="currentColor"
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                    </button>
-                    <button onClick={() => moveBouche("right")}>
-                      <svg
-                        width="30"
-                        height="30"
-                        viewBox="0 0 15 15"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M6.1584 3.13508C6.35985 2.94621 6.67627 2.95642 6.86514 3.15788L10.6151 7.15788C10.7954 7.3502 10.7954 7.64949 10.6151 7.84182L6.86514 11.8418C6.67627 12.0433 6.35985 12.0535 6.1584 11.8646C5.95694 11.6757 5.94673 11.3593 6.1356 11.1579L9.565 7.49985L6.1356 3.84182C5.94673 3.64036 5.95694 3.32394 6.1584 3.13508Z"
                           fill="currentColor"
                           fillRule="evenodd"
                           clipRule="evenodd"
@@ -685,13 +650,20 @@ const Canvas = () => {
           </div>
         </div>
         <div className="boutons-fins">
-          <button onClick={changeScenar} style={{ marginTop: 10 }}>
-            Changer de scénario {scenario}
-          </button>
+          <select
+            value={scenario}
+            onChange={(e) => setScenario(Number(e.target.value))}
+            style={{ marginTop: 10 }}
+          >
+            <option value={1}>Scénario 1</option>
+            <option value={2}>Scénario 2</option>
+            <option value={3}>Scénario 3</option>
+          </select>
+
           <button onClick={handleSendToServer} style={{ marginTop: 10 }}>
             Enregistrer
           </button>
-          <Link to="/galerie">
+          <Link to={`/galerie/${scenario}`}>
             <button>Galerie</button>
           </Link>
         </div>

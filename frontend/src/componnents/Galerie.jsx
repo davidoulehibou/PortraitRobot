@@ -1,10 +1,13 @@
 
+import { SceneCanvas } from 'konva/lib/Canvas';
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 function Galerie() {
+  const {scenario} = useParams()
   const [images, setImages] = useState({})
-  const [scenar, setScenar] = useState('1') // par défaut
+  const [scenar, setScenar] = useState(scenario) // par défaut
 
   useEffect(() => {
     fetch('http://localhost:3001/list-images')
@@ -33,7 +36,7 @@ function Galerie() {
             key={index}
             src={url}
             alt={`saved-${index}`}
-            style={{ width: 200, borderRadius: 8, boxShadow: '0 0 8px #ccc' }}
+            style={{ width: 200, borderRadius: 8, boxShadow: '0 0 8px #ccc', backgroundColor:'white'}}
           />
         ))}
       </div>
