@@ -4,7 +4,7 @@ Cette application permet de créer un portrait robot interactif en sélectionnan
 
 ---
 
-## 🔄 Lancement de l'application
+## Lancement de l'application
 
 1. Exécuter le fichier `Start.bat`.
 2. Attendre environ 5 secondes pour que le navigateur se lance automatiquement.
