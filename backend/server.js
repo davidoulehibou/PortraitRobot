@@ -3,6 +3,9 @@ const fs = require('fs')
 const path = require('path')
 const cors = require('cors')
 
+const dotenv = require("dotenv")
+dotenv.config
+
 const app = express()
 const PORT = 3000
 
@@ -51,7 +54,7 @@ app.get('/api/list-images', (req, res) => {
         const folderPath = path.join(IMAGE_DIR, folder)
         const files = fs.readdirSync(folderPath)
   
-        result[folder] = files.map(file => `http://localhost:${PORT}/images/${folder}/${file}`)
+        result[folder] = files.map(file => `${process.env.URL}/images/${folder}/${file}`)
       })
   
       res.json(result)
