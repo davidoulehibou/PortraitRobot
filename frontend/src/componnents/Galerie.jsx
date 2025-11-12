@@ -10,7 +10,7 @@ function Galerie() {
   const [scenar, setScenar] = useState(scenario) // par défaut
 
   useEffect(() => {
-    fetch('http://localhost:3001/list-images')
+    fetch(`${import.meta.env.VITE_URL}/api/list-images`)
       .then(res => res.json())
       .then(data => setImages(data))
       .catch(err => console.error('Erreur lors du chargement des images', err))

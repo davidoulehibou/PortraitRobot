@@ -43,13 +43,16 @@ const Canvas = () => {
     const uri = stageRef.current.toDataURL();
 
     try {
-      const response = await fetch("http://localhost:3001/save-image", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ imageData: uri, scenario: scenario }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/api/save-image`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ imageData: uri, scenario: scenario }),
+        }
+      );
 
       const text = await response.text();
       console.log(text);

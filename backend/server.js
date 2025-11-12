@@ -4,14 +4,20 @@ const path = require('path')
 const cors = require('cors')
 
 const app = express()
-const PORT = 3001
+const PORT = 3000
 
 const IMAGE_DIR = path.join(__dirname, 'saved-image')
 
-app.use(cors()) // Important pour accepter les requêtes de localhost:3000
+
+app.use(cors());
+
+// ... tes routes ici
+
 app.use(express.json({ limit: '10mb' }))
 
-app.post('/save-image', (req, res) => {
+app.get('/api/ping', (req, res) => res.send('pong'));
+
+app.post('/api/save-image', (req, res) => {
   const { imageData, scenario } = req.body
 
   const base64Data = imageData.replace(/^data:image\/png;base64,/, '')
@@ -31,7 +37,7 @@ app.use('/images', express.static(IMAGE_DIR))
 
 
 // 3. Retourner la liste des images
-app.get('/list-images', (req, res) => {
+app.get('/api/list-images', (req, res) => {
     fs.readdir(IMAGE_DIR, { withFileTypes: true }, (err, entries) => {
       if (err) {
         return res.status(500).json({ error: 'Impossible de lire les scénarios' })
